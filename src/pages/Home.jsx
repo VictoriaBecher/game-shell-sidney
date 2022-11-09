@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../components/common/ui";
 import { Layout } from "../layouts";
 import { add, sub, addNumber } from "../store/actions";
-import { setUser } from "../store/actions/authActions";
+import { login } from "../store/actions/authActions";
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ export const Home = () => {
         </div>
 
         <div className="mt-11">
-          <button type="button" onClick={() => dispatch(setUser())}>
+          <button type="button" onClick={() => dispatch(login())}>
             Set Carol
           </button>
         </div>

@@ -7,3 +7,17 @@ export const setUser = () => {
     },
   };
 };
+
+export const login = () => {
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch(setUser());
+    }, 2000);
+  };
+};
+
+export const logout = () => {
+  return {
+    type: "auth/logOut",
+  };
+};
