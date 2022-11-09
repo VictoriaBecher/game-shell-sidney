@@ -1,8 +1,9 @@
-import { MdGames } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { logout } from "../../../store/actions/authActions";
-import { Button } from "../ui";
+import { MdGames } from 'react-icons/md';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { logout } from '../../../store/actions/authActions';
+import { GoogleLogin } from '../../auth';
+import { Button } from '../ui';
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -32,9 +33,7 @@ export const Header = () => {
             Log out
           </Button>
         ) : (
-          <Button type="button" title="Log in">
-            Log in
-          </Button>
+          <GoogleLogin></GoogleLogin>
         )}
       </div>
     </div>
