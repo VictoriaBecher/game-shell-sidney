@@ -2,7 +2,7 @@ import { MdGames } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { unsetUser } from '../../../store/actions/authActions';
-
+import { RiUser5Fill } from 'react-icons/ri';
 import { GoogleLogin } from '../../auth';
 import { Button } from '../ui';
 
@@ -23,16 +23,24 @@ export const Header = () => {
 
       <div>
         {authenticated ? (
-          <Button
-            onClick={() => {
-              dispatch(unsetUser());
-            }}
-            type="button"
-            skin="primaryInverted"
-            title="Log Out"
-          >
-            Log out
-          </Button>
+          <div className="flex gap-2">
+            <Link to="profile" title="Profile">
+              <Button element="span">
+                <RiUser5Fill className="inline-block"></RiUser5Fill>
+              </Button>
+            </Link>
+
+            <Button
+              onClick={() => {
+                dispatch(unsetUser());
+              }}
+              type="button"
+              skin="primaryInverted"
+              title="Log Out"
+            >
+              Log out
+            </Button>
+          </div>
         ) : (
           <GoogleLogin></GoogleLogin>
         )}

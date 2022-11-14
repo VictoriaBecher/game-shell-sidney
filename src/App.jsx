@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import { Home, FourOfFour, Play } from './pages';
+import { Home, FourOfFour, Play, Profile } from './pages';
 
 const router = createBrowserRouter([
   {
@@ -8,12 +8,16 @@ const router = createBrowserRouter([
     element: <Home></Home>,
   },
   {
-    path: '*',
-    element: <FourOfFour></FourOfFour>,
-  },
-  {
     path: '/play',
     element: <Play></Play>,
+  },
+  {
+    path: '/profile',
+    element: <Profile></Profile>,
+  },
+  {
+    path: '*',
+    element: <FourOfFour></FourOfFour>,
   },
 ]);
 
