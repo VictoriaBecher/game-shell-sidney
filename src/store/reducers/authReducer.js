@@ -1,5 +1,12 @@
 const initialState = {
-  user: {},
+  user: {
+    fisrtName: '',
+    lastName: '',
+    email: '',
+    avatar: '',
+    id: '',
+    name: '',
+  },
   established: true, //change to false
   authenticated: false,
 };
@@ -8,25 +15,20 @@ export const authReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case "auth/setUser":
+    case 'auth/setUser':
       // explicit
       const newState = {
-        user: {
-          name: payload.name,
-          surname: payload.surname,
-        },
+        user: payload,
         authenticated: true,
         established: state.established,
       };
 
       return newState;
 
-    case "auth/logOut":
+    case 'auth/unsetUser':
       return {
-        ...state,
-        authenticated: false,
-        established: false,
-        user: {},
+        // shallow copy
+        ...initialState,
       };
 
     default:

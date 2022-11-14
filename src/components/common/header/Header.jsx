@@ -1,7 +1,8 @@
 import { MdGames } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { logout } from '../../../store/actions/authActions';
+import { unsetUser } from '../../../store/actions/authActions';
+
 import { GoogleLogin } from '../../auth';
 import { Button } from '../ui';
 
@@ -23,12 +24,12 @@ export const Header = () => {
       <div>
         {authenticated ? (
           <Button
+            onClick={() => {
+              dispatch(unsetUser());
+            }}
             type="button"
             skin="primaryInverted"
             title="Log Out"
-            onClick={() => {
-              dispatch(logout());
-            }}
           >
             Log out
           </Button>

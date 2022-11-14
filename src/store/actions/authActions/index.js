@@ -1,23 +1,28 @@
-export const setUser = () => {
+// export const login = () => {
+//   return (dispatch) => {
+//     setTimeout(() => {
+//       dispatch(setUser());
+//     }, 2000);
+//   };
+// };
+
+// import userEvent from '@testing-library/user-event';
+
+// export const logout = () => {
+//   return {
+//     type: 'auth/logOut',
+//   };
+// };
+
+export const setUser = (user) => {
   return {
-    type: "auth/setUser",
-    payload: {
-      name: "Carol",
-      surname: "Carolson",
-    },
+    type: 'auth/setUser',
+    payload: user,
   };
 };
 
-export const login = () => {
-  return (dispatch) => {
-    setTimeout(() => {
-      dispatch(setUser());
-    }, 2000);
-  };
-};
-
-export const logout = () => {
+export const unsetUser = () => {
   return {
-    type: "auth/logOut",
+    type: 'auth/unsetUser',
   };
 };
