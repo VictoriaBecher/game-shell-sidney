@@ -21,10 +21,8 @@ export const Profile = () => {
             </div>
           </section>
 
-          <section>
-            <div>
-              <ProfileForm></ProfileForm>
-            </div>
+          <section className="mt-4 lg:w-1/4 lg:mt-12 mx-auto">
+            <ProfileForm></ProfileForm>
           </section>
         </div>
       </AuthorizedLayout>
