@@ -16,7 +16,7 @@ export const Profile = () => {
             <div className="col-span-8">
               <UserProfile></UserProfile>
             </div>
-            <div className="col-span-4">
+            <div className="col-span-4 flex justify-center mt-8 lg:mt-0">
               <Creature></Creature>
             </div>
           </section>
