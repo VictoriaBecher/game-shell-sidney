@@ -9,6 +9,20 @@ export const Creature = () => {
     return { mainColor, eyeColor, secondaryColor };
   });
 
+  const blink1 = keyframes`
+from, 0%, 50%, 100%, to {
+  transform: translateY(0);
+}
+
+25% {
+        transform: translateY(35px);
+      }
+`;
+
+  const cssBlink = css`
+    animation: ${blink1} 2s forwards linear infinite;
+  `;
+
   const cssClass = css`
     padding-top: 20px;
 
@@ -72,27 +86,6 @@ export const Creature = () => {
       height: 35px;
     }
 
-    @keyframes blink {
-      0% {
-        transform: translate(0, 0);
-      }
-
-      25% {
-        transform: translate(0, 35px);
-      }
-
-      50% {
-        transform: translate(0, 0);
-      }
-      100% {
-        transform: translate(0, 0);
-      }
-    }
-
-    .eye .eyelid {
-      animation: blink 2s forwards linear infinite;
-    }
-
     .creature__nose {
       margin-top: 10px;
     }
@@ -131,12 +124,12 @@ export const Creature = () => {
         <div className="creature_eyes">
           <div className="eye creature__eye creature__left_eye">
             <div className="eye__iris"></div>
-            <div className="eyelid"></div>
+            <div className={`eyelid ${cssBlink}`}></div>
           </div>
 
           <div className="eye creature__eye creature__right_eye">
             <div className="eye__iris"></div>
-            <div className="eyelid"></div>
+            <div className={`eyelid ${cssBlink}`}></div>
           </div>
         </div>
 
