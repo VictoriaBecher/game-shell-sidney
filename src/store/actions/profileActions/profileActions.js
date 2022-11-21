@@ -1,4 +1,5 @@
 import { client } from '../../../api/users';
+import { unsetUser } from '../authActions';
 
 export const setCreatureColors = (colorsObject) => {
   return {
@@ -18,7 +19,7 @@ export const setCreatureColor = (targetKey, colorValue) => {
 };
 
 export const createUserProfile = (id) => {
-  return async (dispatch, getState) => {
+  return async (_, getState) => {
     const state = getState();
     const { profile } = state;
 
@@ -47,5 +48,25 @@ export const updateUserProfile = (id, creature) => {
     const { data } = await client.patch(`/profiles/${id}`, { creature });
 
     return data;
+  };
+};
+
+export const deleteUserProfile = (id) => {
+  return async (dispatch, getState) => {
+    const { auth } = getState();
+    const { user, authenticated } = auth;
+
+    if (!authenticated) {
+      return;
+    }
+
+    const id = user.id;
+
+    const profilePromise = client.delete(`/profiles/${id}`);
+    const userPromise = client.delete(`/users/${id}`);
+
+    await Promise.all([profilePromise, userPromise]);
+
+    dispatch(unsetUser());
   };
 };

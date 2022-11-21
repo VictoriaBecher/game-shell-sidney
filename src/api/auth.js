@@ -1,6 +1,11 @@
 import jwtDecode from 'jwt-decode';
 import store from '../store';
-import { setUser } from '../store/actions/authActions';
+import {
+  createUser,
+  readUser,
+  setUser,
+  setUserStats,
+} from '../store/actions/authActions';
 import {
   createUserProfile,
   readUserProfile,
@@ -48,6 +53,15 @@ export const initializeGoogleAuth = async () => {
             })
             .catch((_) => {
               store.dispatch(createUserProfile(id));
+            });
+
+          store
+            .dispatch(readUser(id))
+            .then((data) => {
+              store.dispatch(setUserStats(data.stats));
+            })
+            .catch((_) => {
+              store.dispatch(createUser(id));
             });
         },
         scope: 'email profile',
