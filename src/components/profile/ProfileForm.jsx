@@ -1,15 +1,28 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCreatureColor } from '../../store/actions/profileActions/profileActions';
+import {
+  setCreatureColor,
+  updateUserProfile,
+} from '../../store/actions/profileActions/profileActions';
 import { Button } from '../common/ui';
+import { TbDeviceFloppy, TbFidgetSpinner } from 'react-icons/tb';
 
 export const ProfileForm = () => {
+  const dispatch = useDispatch();
+  const [busy, setBusy] = useState(false);
   const { mainColor, eyeColor, secondaryColor } = useSelector(({ profile }) => {
     const { mainColor, eyeColor, secondaryColor } = profile.creature;
 
     return { mainColor, eyeColor, secondaryColor };
   });
 
-  const dispatch = useDispatch();
+  const { userId } = useSelector(({ auth }) => {
+    const { user } = auth;
+
+    return {
+      userId: user.id,
+    };
+  });
 
   const onColorPickerChange = (event) => {
     const element = event.currentTarget;
@@ -21,8 +34,18 @@ export const ProfileForm = () => {
     dispatch(setCreatureColor(targetKey, colorValue));
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
+    setBusy(true);
+    await dispatch(
+      updateUserProfile(userId, {
+        mainColor,
+        eyeColor,
+        secondaryColor,
+      }),
+    );
+
+    setBusy(false);
   };
 
   return (
@@ -61,8 +84,23 @@ export const ProfileForm = () => {
       </div>
 
       <div className="text-center">
-        <Button type="submit" title="save">
-          Save
+        <Button
+          type="submit"
+          title="save"
+          disabled={busy}
+          className="gap-2 items-center"
+        >
+          {busy ? (
+            <>
+              <TbFidgetSpinner className="animate-spin"></TbFidgetSpinner>
+              Saving
+            </>
+          ) : (
+            <>
+              <TbDeviceFloppy></TbDeviceFloppy>
+              Save
+            </>
+          )}
         </Button>
       </div>
     </form>
