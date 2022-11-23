@@ -5,10 +5,10 @@ import { Creature } from '../components/profile/Creature';
 import { ProfileForm } from '../components/profile/ProfileForm';
 import { UserProfile } from '../components/profile/UserProfile';
 import { AuthorizedLayout, Layout } from '../layouts';
-import { deleteUserProfile } from '../store/actions/profileActions/profileActions';
+// import { deleteUserProfile } from '../store/actions/profileActions/profileActions';
 
 export const Profile = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [showConfirmedDialog, setShowConfirmedDialog] = useState(false);
 
   return (
