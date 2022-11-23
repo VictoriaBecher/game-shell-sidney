@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button } from '../components/common/ui';
+import { Button, Dialog } from '../components/common/ui';
 import { Creature } from '../components/profile/Creature';
 import { ProfileForm } from '../components/profile/ProfileForm';
 import { UserProfile } from '../components/profile/UserProfile';
@@ -8,6 +9,7 @@ import { deleteUserProfile } from '../store/actions/profileActions/profileAction
 
 export const Profile = () => {
   const dispatch = useDispatch();
+  const [showConfirmedDialog, setShowConfirmedDialog] = useState(false);
 
   return (
     <Layout>
@@ -36,13 +38,40 @@ export const Profile = () => {
               title="Delete profile"
               type="button"
               onClick={() => {
-                dispatch(deleteUserProfile());
+                // dispatch(deleteUserProfile());
+                setShowConfirmedDialog(true);
               }}
             >
               Delete
             </Button>
           </section>
         </div>
+
+        <Dialog
+          show={showConfirmedDialog}
+          onClose={() => {
+            setShowConfirmedDialog(false);
+          }}
+        >
+          <p>Are you sure you want to delete your profile?</p>
+
+          <div className="flex justify-between mt-6">
+            <Button type="button" title="Delete profile" skin="danger">
+              Delete
+            </Button>
+
+            <Button
+              type="button"
+              title="Cancel"
+              skin="primaryInverted"
+              onClick={() => {
+                setShowConfirmedDialog(false);
+              }}
+            >
+              Cancel
+            </Button>
+          </div>
+        </Dialog>
       </AuthorizedLayout>
     </Layout>
   );
